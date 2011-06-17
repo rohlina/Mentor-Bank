@@ -20,6 +20,7 @@ import ru.mentorbank.backoffice.services.stoplist.StopListService;
 public class MoneyTransferServiceBean implements MoneyTransferSerice {
 
 	public static final String LOW_BALANCE_ERROR_MESSAGE = "Can not transfer money, because of low balance in the source account";
+	public static final String SAVE_OPERATION_ERROR_MESSAGE = "Can not transfer money, because of low balance in the source account";
 	private AccountService accountService;
 	private StopListService stopListService;
 	private OperationDao operationDao;
@@ -74,7 +75,7 @@ public class MoneyTransferServiceBean implements MoneyTransferSerice {
 			try {
 				operationDao.saveOperation(operation);
 			} catch (OperationDaoException e) {
-				throw new TransferException("Ошибка отправки операции!");
+				throw new TransferException(SAVE_OPERATION_ERROR_MESSAGE);
 			}
 		}
 
