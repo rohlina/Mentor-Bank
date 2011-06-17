@@ -33,4 +33,5 @@ public class MoneyTransferServiceTest extends AbstractSpringTest {
 		// verify(mockedStopListService).getJuridicalStopListInfo(null);
 		// verify(mockedAccountService).verifyBalance(null);
 	}
+
 }
