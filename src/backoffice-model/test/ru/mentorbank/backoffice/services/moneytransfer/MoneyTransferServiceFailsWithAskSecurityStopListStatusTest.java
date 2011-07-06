@@ -13,6 +13,7 @@ import ru.mentorbank.backoffice.model.transfer.TransferRequest;
 import ru.mentorbank.backoffice.services.accounts.AccountService;
 import ru.mentorbank.backoffice.services.accounts.AccountServiceBean;
 import ru.mentorbank.backoffice.services.moneytransfer.exceptions.TransferException;
+import ru.mentorbank.backoffice.services.stoplist.StopListService;
 import ru.mentorbank.backoffice.services.stoplist.StopListServiceStub;
 import ru.mentorbank.backoffice.test.AbstractSpringTest;
 
@@ -25,6 +26,7 @@ public class MoneyTransferServiceFailsWithAskSecurityStopListStatusTest extends
 	private JuridicalAccountInfo srcAccountInfo;
 	private TransferRequest transferRequest;
 	private JuridicalAccountInfo dstAccountInfo;
+	private StopListService stopListService;
 
 	@Before
 	public void setUp() {
@@ -45,7 +47,10 @@ public class MoneyTransferServiceFailsWithAskSecurityStopListStatusTest extends
 		// Dynamic Stub
 		when(mockedAccountService.verifyBalance(dstAccountInfo)).thenReturn(
 				true);
+		stopListService = new StopListServiceStub();
+
 		moneyTransferService.setAccountService(mockedAccountService);
+		moneyTransferService.setStopListService(stopListService);
 	}
 
 	@Test
